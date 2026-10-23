@@ -1,0 +1,33 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+*.tfplan
+tfplan
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Variable files that can hold secrets (the .example file is committed)
+*.tfvars
+*.tfvars.json
+!terraform.tfvars.example
+
+# Environment files and credentials
+.env
+.env.*
+*.pem
+*.key
+*apikey*.json
+
+# Cluster access files written by the IBM Cloud provider
+kubeconfig/
+*.kubeconfig
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/

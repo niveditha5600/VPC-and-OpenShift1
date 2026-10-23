@@ -1,0 +1,31 @@
+# Copy to terraform.tfvars (git-ignored) and adjust. Do NOT put the API key in this file;
+# export it instead:  export TF_VAR_ibmcloud_api_key="<your key>"
+
+prefix = "roks-demo"
+region = "us-south"
+
+# Leave null to create "<prefix>-resource-group", or name an existing group.
+existing_resource_group_name = null
+
+resource_tags = ["project:vpc-openshift"]
+
+# One worker subnet per zone (zone-1, zone-2, zone-3). Must sit inside 10.0.0.0/8.
+vpc_subnet_cidrs = ["10.10.10.0/24", "10.20.10.0/24", "10.30.10.0/24"]
+
+# Who may reach the public load balancers on 80/443. Restrict this for anything but a demo.
+public_ingress_cidrs = ["0.0.0.0/0"]
+
+# OpenShift
+ocp_version             = null # null = current IBM Cloud default
+worker_machine_type     = "bx2.4x16"
+workers_per_zone        = 2
+worker_operating_system = "RHCOS"
+
+# Private-only cluster (cannot be changed later; Terraform must reach the private endpoint)
+disable_public_endpoint = false
+
+# true allows workers to reach the internet (needed for OperatorHub). false blocks public egress.
+disable_outbound_traffic_protection = false
+
+# Keep false in production. Set true only for throw-away environments so destroy can remove the keys.
+kms_force_delete = false
